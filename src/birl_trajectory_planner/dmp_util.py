@@ -11,7 +11,7 @@ def get_dmp_model(mat, model_type='pydmps'):
         dmp.imitate_path(y_des=mat.T)
         return dmp
 
-def generalize_via_dmp(start, end, model,plot=True):
+def generalize_via_dmp(start, end, model):
     import pydmps
     import ipdb
     new_dmp = pydmps.dmp_discrete.DMPs_discrete(n_dmps=model.n_dmps, n_bfs=model.n_bfs, ay=model.ay, w=model.w)  
@@ -33,3 +33,7 @@ def generalize_via_dmp_no_start_end(model,plot=True):
 
     return y_track
 
+def dmp_generalization(start, end, demo):
+    model = get_dmp_model(demo)
+    y_track = generalize_via_dmp(start, end, model)
+    return y_track
