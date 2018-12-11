@@ -28,26 +28,28 @@ def planner(start=None, end=None, planner_type = "dmp",phase=None, orig_demo_mod
 def dmp_plan(start=None, end=None,phase=None, orig_demo_mode= None):
     if phase == 1:
         rospy.loginfo("Dmp planner Phase: %s " %phase)
-        demo = np.load(open(os.path.join(demonstration_model_dir,'home_to_prepick', '2.npy'), 'r'))
+        demo = np.load(open(os.path.join(demonstration_model_dir,'home_to_prepick', '1.npy'), 'r'))
     elif phase == 2:
         rospy.loginfo("Dmp planner Phase: %s " %phase)
-        demo = np.load(open(os.path.join(demonstration_model_dir,'prepick_to_pick', '2.npy'), 'r')) 
+        demo = np.load(open(os.path.join(demonstration_model_dir,'prepick_to_pick', '1.npy'), 'r')) 
     elif phase == 3:
         rospy.loginfo("Dmp planner Phase: %s " %phase)
-        demo = np.load(open(os.path.join(demonstration_model_dir,'prepick_to_pick', '2.npy'), 'r')) 
+        demo = np.load(open(os.path.join(demonstration_model_dir,'prepick_to_pick', '1.npy'), 'r')) 
     elif phase == 4:
         rospy.loginfo("Dmp planner Phase: %s " %phase)
-        demo = np.load(open(os.path.join(demonstration_model_dir, 'pre_pick_to_pre_place.npy'), 'r')) 
+        demo = np.load(open(os.path.join(demonstration_model_dir, 'prepick_to_preplace','1.npy'), 'r')) 
     elif phase == 5:
         rospy.loginfo("Dmp planner Phase: %s " %phase)
-        demo = np.load(open(os.path.join(demonstration_model_dir, 'pre_place_to_place.npy'), 'r')) 
+        demo = np.load(open(os.path.join(demonstration_model_dir,'preplace_to_place','1.npy' ), 'r')) 
     elif phase == 6:
         rospy.loginfo("Dmp planner Phase: %s " %phase)
-        demo = np.load(open(os.path.join(demonstration_model_dir, 'place_to_pre_place.npy'), 'r')) 
+        demo = np.load(open(os.path.join(demonstration_model_dir, 'preplace_to_place','1.npy'), 'r')) 
 
     if orig_demo_mode != None:  
         start = demo[0]
         end  = demo[-1]
+        rospy.loginfo("dmp orig start pose is %s\n" %start[0:3])
+        rospy.loginfo("dmp orig end pose is %s\n" %end[0:3] )
     cart_trajectory_plan = dmp_generalization(start, end, demo)
 
     joint_plan = trac_ik_solver.inverse_kinematic(cart_trajectory_plan)

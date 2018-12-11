@@ -4,10 +4,11 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
+folder_name = "preplace_to_place"
 dir_of_this_script = os.path.dirname(os.path.realpath(__file__))
-demonstration_dir = os.path.join(dir_of_this_script, '..', 'dmp_data', 'new_demonstrations',"prepick_to_pick")
-fig_saving_path = os.path.join(dir_of_this_script, '..', 'dmp_data', 'processed_demonstrations',"figures","prepick_to_pick")
-new_demo_saving_path = os.path.join(dir_of_this_script, '..', 'dmp_data', 'processed_demonstrations',"demos","prepick_to_pick")
+demonstration_dir = os.path.join(dir_of_this_script, '..', 'dmp_data', 'new_demonstrations',folder_name)
+fig_saving_path = os.path.join(dir_of_this_script, '..', 'dmp_data', 'processed_demonstrations',"figures",folder_name)
+new_demo_saving_path = os.path.join(dir_of_this_script, '..', 'dmp_data', 'processed_demonstrations',"demos",folder_name)
 
 
 def process_human_demonstration(demo, start_index, end_index):
