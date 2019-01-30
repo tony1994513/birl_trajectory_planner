@@ -15,6 +15,7 @@ new_demo_saving_path = os.path.join(dir_of_this_script, '..', 'dmp_data', 'proce
 num_of_start = 30
 spatial_range = [-0.1, 0.1]
 temporal_range = [4,5]
+
 def process_human_demonstration(demo, start_index, end_index):
     orig_start = demo[0]
     orig_end = demo[-1]
@@ -100,13 +101,15 @@ def start_end_decider():
     
 def time_giver(dmp_traj_list):
     random_time = [random.uniform(temporal_range[0], temporal_range[1]) for idx in range(0,num_of_start) ]
-    ipdb.set_trace()
+    # ipdb.set_trace()  
     dmp_w_time_list = []
     for idx, demo in enumerate(dmp_traj_list):
         time_stamp = np.linspace(0,random_time[idx],100)
+        # ipdb.set_trace()
         temp = np.vstack((time_stamp,demo))
         dmp_w_time_list.append(temp)
     return dmp_w_time_list
+
 def main():
     demo_name = "5"
     human_demonstration = np.load(open(os.path.join(demonstration_dir, demo_name)+".npy", 'r'))[:,:3]
@@ -115,7 +118,7 @@ def main():
     new_data = process_human_demonstration(human_demonstration,start_index, end_index)
     start_list, end_list = start_end_decider()
     dmp_traj_list = traning_dmp_manyshots(new_data,start_list, end_list)
-    dmp_w_time_list = time_giver(dmp_traj_list)
+    # dmp_w_time_list = time_giver(dmp_traj_list)
     # dmp_traj = traning_dmp(new_data)
     plot_oneshot(human_demonstration,fig_idx=0, title_="human_demonstration")
     plot_oneshot(new_data,fig_idx=1, title_="dmp_proc_demonstration")
